@@ -1,0 +1,42 @@
+<div>
+    <h2>Liste des Produits</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prix</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products()">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>
+            <button (click)="deleteProduit(product.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <h3>Ajouter un Produit</h3>
+    <form [formGroup]="produitForm" (ngSubmit)="addProduit()">
+      <label for="name">Nom :</label>
+      <input id="name" formControlName="name" type="text" />
+      <div *ngIf="productForm.controls['name'].invalid && productForm.controls['name'].touched">
+        Nom requis.
+      </div>
+  
+      <label for="price">Prix :</label>
+      <input id="price" formControlName="price" type="number" />
+      <div *ngIf="productForm.controls['price'].invalid && productForm.controls['price'].touched">
+        Prix requis et doit être positif.
+      </div>
+  
+      <button type="submit" [disabled]="productForm.invalid">Ajouter</button>
+    </form>
+  </div>
+  
+  
